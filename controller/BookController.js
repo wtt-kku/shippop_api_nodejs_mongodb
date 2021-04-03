@@ -106,12 +106,15 @@ async function updateBook(req, res) {
       return res.status(403).send(response);
     }
     const dataUpdate = {
-      $set: {
-        name: req.body.name,
-        description: req.body.description,
-        price: req.body.price,
-      },
+      $set: {},
     };
+
+    req.body.name ? (dataUpdate["$set"]["name"] = req.body.name) : "";
+    req.body.description
+      ? (dataUpdate["$set"]["description"] = req.body.description)
+      : "";
+    req.body.price ? (dataUpdate["$set"]["price"] = req.body.price) : "";
+
     Book.updateOne({ _id: req.params.id }, dataUpdate, function (err, result) {
       if (err) {
         const response = {

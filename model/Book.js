@@ -23,7 +23,10 @@ const bookSchema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
-  rating: mongoose.Schema.Types.Decimal128,
+  rating: {
+    type: Number,
+    default: 0,
+  },
   created_at: {
     type: Date,
     default: Date.now,
